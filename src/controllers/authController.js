@@ -9,8 +9,6 @@ router.post("/register", async (req, res) => {
     const userData = req.body;
 
     await authService.register(userData);
-    
-    console.log(userData);
 
     res.redirect("/auth/login");
 });
@@ -24,7 +22,7 @@ router.post("/login", async (req, res) => {
      
    const token = await authService.login(email, password);
 
-   console.log(token);
+   res.cookie("auth", token);
 
    res.redirect("/"); 
 });

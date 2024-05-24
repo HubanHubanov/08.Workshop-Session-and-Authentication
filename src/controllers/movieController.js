@@ -27,7 +27,6 @@ router.post("/create", async (req, res) => {
 router.get("/movies/:movieId", async (req, res) => {
     const movieId = req.params.movieId; 
     const movie =await movieService.getOne(movieId).lean(); 
-    console.log(movie);
     // const casts = await castService.getByIds(movie.casts).lean();
 
     //TODO: This is not perfect. Use handlebar controllers.
@@ -52,8 +51,11 @@ router.post("/movies/:movieId/attach", async (req, res) => {
     
      await movieService.attach(movieId, castId);
 
-     
-res.redirect(`/movies/${movieId}/attach`);
-})
+     res.redirect(`/movies/${movieId}/attach`);
+});
+
+router.get("/movies/:movieId/edit", (req, res) => {
+     res.render("movie/edit")
+});
 
 module.exports = router;
