@@ -13,7 +13,7 @@ router.get("/movies/:movieId", async (req, res) => {
     movie.rating = new Array(Number(movie.rating)).fill(true);
     // movie.ratingStars = "&#x2605;".repeat(movie.rating);
 
-   res.render("details", {movie});  
+   res.render("movie/details", {movie});  
 });
 
 router.get("/create", isAuth, (req, res) => {
