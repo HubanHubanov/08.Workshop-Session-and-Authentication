@@ -10,7 +10,7 @@ router.get("/movies/:movieId", async (req, res) => {
     const movie = await movieService.getOne(movieId).lean(); 
     // const isOwner = movie.owner.toString() === req.user._id;
     // const isOwner = movie.owner === mongoose.Types.ObjectId(req.user._id)
-    const isOwner = movie.owner == req.user._id;
+    const isOwner = movie.owner == req.user?._id;
     // const casts = await castService.getByIds(movie.casts).lean();
 
     //TODO: This is not perfect. Use handlebar controllers.
