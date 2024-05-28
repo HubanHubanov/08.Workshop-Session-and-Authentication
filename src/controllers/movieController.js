@@ -17,11 +17,16 @@ router.get("/movies/:movieId", async (req, res) => {
 });
 
 router.get("/create", isAuth, (req, res) => {
-    res.render("create")
+    res.render("create");
 });
 
 router.post("/create", isAuth, async (req, res) => {
-    const newMovie = req.body;
+    //  newMovie = req.body;
+    // newMovie.owner = req.user._id;
+    const newMovie = {
+        ...req.body,
+        owner: req.user._id
+    }
 
 
     try {
