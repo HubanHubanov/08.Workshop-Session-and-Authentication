@@ -16,7 +16,7 @@
             <p class="card-year">Year: {{movie.year}}</p>
             <p class="card-ranking">Rating:
               {{!-- <span id="stars">{{{ratingStars}}}</span></p> --}}
-              <span id="stars">{{#each rating}} &#x2605; {{/each}}</span></p>
+              <span id="stars">{{#each movie.rating}} &#x2605; {{/each}}</span></p>
           </div>
 
         </div>
@@ -27,7 +27,7 @@
          {{#if isOwner}}
          <div class="details-btn">
                 <a href="/movies/{{movie._id}}/edit" id="edit-button">Edit</a>
-                <a href="#" id="delete-button">Delete</a>
+                <a href="/movies/{{movie._id}}/delete" id="delete-button">Delete</a>
          </div>
          {{/if}}
 
