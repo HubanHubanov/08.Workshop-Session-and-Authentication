@@ -3,17 +3,20 @@ const router = require("express").Router();
 const movieService = require("../services/movieService");
 const castService = require("../services/castService");
 const {isAuth} = require("../middlewares/authMiddleware");
+const { default: mongoose } = require("mongoose");
 
 router.get("/movies/:movieId", async (req, res) => {
     const movieId = req.params.movieId; 
-    const movie =await movieService.getOne(movieId).lean(); 
+    const movie = await movieService.getOne(movieId).lean(); 
+    // const isOwner = movie.owner.toString() === req.user._id;
+    // const isOwner = movie.owner === mongoose.Types.ObjectId(req.user._id)
+    const isOwner = movie.owner == req.user._id;
     // const casts = await castService.getByIds(movie.casts).lean();
 
     //TODO: This is not perfect. Use handlebar controllers.
     movie.rating = new Array(Number(movie.rating)).fill(true);
     // movie.ratingStars = "&#x2605;".repeat(movie.rating);
-
-   res.render("movie/details", {movie});  
+   res.render("movie/details", {movie, isOwner});  
 });
 
 router.get("/create", isAuth, (req, res) => {
